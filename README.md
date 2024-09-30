@@ -62,12 +62,17 @@ Photoshop-Filters-Portfolio/
 - **Matplotlib**: A library used for visualizing the output before and after applying filters.
 
 
-###  Example Results
+###Results
+##Before-and-After Images
 
-| Original Image       | Filtered Image        |
-|----------------------|-----------------------|
-| ![original](images/original/original_image_1.jpg) | ![sepia](images/filtered/sepia/sepia_image_1.jpg) |
-| ![original](images/original/original_image_2.jpg) | ![black_and_white](images/filtered/black_and_white/bw_image_2.jpg) |
+| Filter            | Original Image                           | Filtered Image                            |
+|-------------------|------------------------------------------|-------------------------------------------|
+| Bl_w              | ![original](images/original_image.jpg)   | ![bl_w](images/filtered/bl_w              |
+| Sepia             | ![original](images/original_image.jpg)   | ![sepia](images/filtered/sepia.jpg)       |
+| Vignette          | ![original](images/original_image.jpg)   | ![vignette](images/filtered/vignette.jpg) |
+| Edge Detection    | ![original](images/original_image.jpg)   | ![edge_detection](images/filtered/edge_detection.jpg)
+
+
 
 *********************************************************************************************************************
 ## Challenges Faced and Solutions
