@@ -18,12 +18,15 @@ image_path = config.get('image_path')
 if not image_path:
     raise ValueError("Image path not found in configuration file.")
 
-# Define the folder to save Black & White images
-output_folder = os.path.join('filtered', 'black_and_white')
+# Define folders to save original and filtered images
+original_folder = os.path.join('filtered', 'originals')
+bw_folder = os.path.join('filtered', 'black_and_white')
 
-# Ensure the output folder exists
-if not os.path.exists(output_folder):
-    os.makedirs(output_folder)
+# Ensure both the original and black_and_white folders exist
+if not os.path.exists(original_folder):
+    os.makedirs(original_folder)
+if not os.path.exists(bw_folder):
+    os.makedirs(bw_folder)
 
 # Load images using the correct base path and file names
 flower = cv2.imread(os.path.join(image_path, 'Flowers.jpg'))
@@ -58,25 +61,30 @@ def plot(img1, img2):
     plt.show()
     plt.close()  # Close the plot after displaying the images
 
-# Define a function to apply Black & White filter and save the result
-def save_bw_filter(img, img_name):
-    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Convert to Black & White (grayscale)
-    output_path = os.path.join(output_folder, f'{img_name}_bw.jpg')  # Define save path
-    cv2.imwrite(output_path, img_gray)  # Save the image
-    print(f"Saved: {output_path}")  # Confirmation message
+# Define a function to save both the original and the filtered image
+def save_images(img, img_name):
+    # Save the original image
+    original_path = os.path.join(original_folder, f'{img_name}_original.jpg')
+    cv2.imwrite(original_path, img)
+    print(f"Saved original: {original_path}")
+    
+    # Apply Black & White (grayscale) filter and save the filtered image
+    img_bw = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    bw_path = os.path.join(bw_folder, f'{img_name}_bw.jpg')
+    cv2.imwrite(bw_path, img_bw)
+    print(f"Saved Black & White: {bw_path}")
+    
+    return img_bw  # Return the filtered image for comparison/display
 
-# Apply Black & White filter to each image and save it
-save_bw_filter(flower, 'flower')
-save_bw_filter(house, 'house')
-save_bw_filter(monument, 'monument')
-save_bw_filter(santorini, 'santorini')
-save_bw_filter(new_york, 'new_york')
-save_bw_filter(coast, 'california_coast')
+# Save both the original and Black & White filtered images for each image
+flower_bw = save_images(flower, 'flower')
+house_bw = save_images(house, 'house')
+monument_bw = save_images(monument, 'monument')
+santorini_bw = save_images(santorini, 'santorini')
+new_york_bw = save_images(new_york, 'new_york')
+coast_bw = save_images(coast, 'california_coast')
 
 # Example usage of the plot function to display original and Black & White images
-plot(flower, cv2.imread(os.path.join(output_folder, 'flower_bw.jpg')))  # Display original and BW version
-plot(house, cv2.imread(os.path.join(output_folder, 'house_bw.jpg')))     # Display house
-plot(monument, cv2.imread(os.path.join(output_folder, 'monument_bw.jpg')))  # Display monument
-plot(santorini, cv2.imread(os.path.join(output_folder, 'santorini_bw.jpg')))  # Display santorini
-plot(new_york, cv2.imread(os.path.join(output_folder, 'new_york_bw.jpg')))  # Display New York
-plot(coast, cv2.imread(os.path.join(output_folder, 'california_coast_bw.jpg')))  # Display California Coast
+plot(flower, flower_bw)  # Display original and Black & White version of flower
+plot(house, house_bw)    # Display original and Black & White version of house
+plot(monument, monument_bw)  # Display original and Black & White version of monument
