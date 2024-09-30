@@ -22,6 +22,12 @@ Below are the filters applied to the images, along with a brief description of e
 
 *************************************************************************************************
 
+# Reuirements and setup:
+Python 3.11
+OpenCV 4.9
+Numpy
+Matplotlib (for visualizations)
+
 ## Folder Structure
 
 ```bash
@@ -72,7 +78,17 @@ Photoshop-Filters-Portfolio/
 | Vignette          | ![original](images/original_image.jpg)   | ![vignette](images/filtered/vignette.jpg) |
 | Edge Detection    | ![original](images/original_image.jpg)   | ![edge_detection](images/filtered/edge_detection.jpg)
 
+*********************************************************************************************************************
+Observations:
 
+Filter Application on Different Image Types
+Filters like Sepia and Vignette performed well on images with low contrast, whereas Edge Detection and Sketch excelled in images with high contrast.
+
+Image Size and Performance
+Large image files required careful memory management, especially when applying computationally heavy filters like Stylization.
+
+Automation Benefits
+Batch processing via Python scripts reduced the time spent on applying filters manually in Photoshop, allowing for quick testing of different filter combinations.
 
 *********************************************************************************************************************
 ## Challenges Faced and Solutions
