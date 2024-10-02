@@ -19,13 +19,14 @@ image_path = config.get('image_path')
 if not image_path:
     raise ValueError("Image path not found in configuration file.")
 
-# Define folders to save original, black and white, and sepia filtered images
+# Define folders to save original, black and white, sepia, and vignette filtered images
 original_folder = os.path.join('filtered', 'originals')  # Folder for original images
 bw_folder = os.path.join('filtered', 'black_and_white')  # Folder for black and white filtered images
 sepia_folder = os.path.join('filtered', 'sepia')  # Folder for sepia filtered images
+vignette_folder = os.path.join('filtered', 'vignette')  # New folder for vignette filtered images
 
 # Ensure folders exist before saving images. If they don't exist, they will be created to avoid file errors.
-for folder in [original_folder, bw_folder, sepia_folder]:
+for folder in [original_folder, bw_folder, sepia_folder, vignette_folder]:
     if not os.path.exists(folder):
         os.makedirs(folder)  # Creates the folder if it doesn't exist
 
@@ -99,5 +100,10 @@ img_vignette = vignette(img)  # Apply vignette filter to the image
 
 # Display the original and filtered (vignette) image side by side for comparison
 plot(img, img_vignette)
+
+# Save the vignette image in the 'vignette' folder
+vignette_image_path = os.path.join(vignette_folder, 'Flower_vignette.jpg')
+cv2.imwrite(vignette_image_path, img_vignette)  # Save the vignette-filtered image
+print(f"Vignette image saved at: {vignette_image_path}")
 
 plt.show()  # Display the figure to the user
