@@ -20,15 +20,19 @@ if not image_path:
     raise ValueError("Image path not found in configuration file.")
 
 # Define folders to save original, black and white, sepia, and vignette filtered images
-original_folder = os.path.join('filtered', 'originals')  # Folder for original images
-bw_folder = os.path.join('filtered', 'black_and_white')  # Folder for black and white filtered images
-sepia_folder = os.path.join('filtered', 'sepia')  # Folder for sepia filtered images
-vignette_folder = os.path.join('filtered', 'vignette')  # New folder for vignette filtered images
+filtered_folder = 'filtered'  # Base folder for filtered images
+original_folder = os.path.join(filtered_folder, 'originals')  # Folder for original images
+bw_folder = os.path.join(filtered_folder, 'black_and_white')  # Folder for black and white filtered images
+sepia_folder = os.path.join(filtered_folder, 'sepia')  # Folder for sepia filtered images
+vignette_folder = os.path.join(filtered_folder, 'vignette')  # New folder for vignette filtered images
 
 # Ensure folders exist before saving images. If they don't exist, they will be created to avoid file errors.
-for folder in [original_folder, bw_folder, sepia_folder, vignette_folder]:
+for folder in [filtered_folder, original_folder, bw_folder, sepia_folder, vignette_folder]:
     if not os.path.exists(folder):
         os.makedirs(folder)  # Creates the folder if it doesn't exist
+        print(f"Folder created: {folder}")  # Print the folder creation confirmation
+    else:
+        print(f"Folder already exists: {folder}")  # Print if the folder already exists
 
 # Load images from the base path specified in the config file.
 # cv2.imread reads an image from a file and returns a NumPy array.
